@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+
+<!-- Entire Calculator -->
+<GridPane vgap="6" xmlns:fx="http://javafx.com/fxml" fx:controller="com.henrykaus.calculatorgui.calculator_controller">
+    <padding>
+        <Insets bottom="4.0" left="4.0" right="4.0" top="10.0"/>
+    </padding>
+
+    <!-- Row and Column Settings -->
+    <columnConstraints>
+        <ColumnConstraints percentWidth="100"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints percentHeight="25"/>
+        <RowConstraints percentHeight="75"/>
+    </rowConstraints>
+
+    <!-- Text Box and Result -->
+    <GridPane vgap="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="33" hgrow="ALWAYS"/>
+            <ColumnConstraints percentWidth="67" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <rowConstraints>
+            <RowConstraints prefHeight="17" vgrow="NEVER"/>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+
+        <Label text=" Standard" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <TextField fx:id="answer" alignment="BOTTOM_RIGHT" editable="false"
+                   GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <TextField fx:id="expression_field" alignment="BOTTOM_RIGHT"
+                   GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"
+                   onAction="#equals_button_click" promptText="0"
+                   maxWidth="Infinity" maxHeight="Infinity"/>
+    </GridPane>
+
+    <!-- Calculator Buttons -->
+    <GridPane hgap="2" vgap="2" GridPane.columnIndex="0" GridPane.rowIndex="1">
+
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25.0" hgrow="ALWAYS"/>
+            <ColumnConstraints percentWidth="25.0" hgrow="ALWAYS"/>
+            <ColumnConstraints percentWidth="25.0" hgrow="ALWAYS"/>
+            <ColumnConstraints percentWidth="25.0" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+
+        <Button text="CLEAR" onAction="#clear_button_click"
+                GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3"/>
+        <Button text="DEL" onAction="#delete_button_click"
+                GridPane.columnIndex="3" GridPane.rowIndex="0"
+                maxWidth="Infinity" maxHeight="Infinity"/>
+        <Button text="(" onAction="#left_paren_button_click"
+                GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Button text=")" onAction="#right_paren_button_click"
+                GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Button text="^" onAction="#power_button_click"
+                GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <Button text="/" onAction="#divides_button_click"
+                GridPane.columnIndex="3" GridPane.rowIndex="1"
+                maxWidth="Infinity" maxHeight="Infinity"/>
+        <Button text="7" onAction="#seven_button_click"
+                GridPane.columnIndex="0" GridPane.rowIndex="2"
+                id="number"/>
+        <Button text="8" onAction="#eight_button_click"
+                GridPane.columnIndex="1" GridPane.rowIndex="2"
+                id="number"/>
+        <Button text="9" onAction="#nine_button_click"
+                GridPane.columnIndex="2" GridPane.rowIndex="2"
+                id="number"/>
+        <Button text="*" onAction="#times_button_click"
+                GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+        <Button text="4" onAction="#four_button_click"
+                GridPane.columnIndex="0" GridPane.rowIndex="3"
+                id="number"/>
+        <Button text="5" onAction="#five_button_click"
+                GridPane.columnIndex="1" GridPane.rowIndex="3"
+                id="number"/>
+        <Button text="6" onAction="#six_button_click"
+                GridPane.columnIndex="2" GridPane.rowIndex="3"
+                id="number"/>
+        <Button text="-" onAction="#minus_button_click"
+                GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+        <Button text="1" onAction="#one_button_click"
+                GridPane.columnIndex="0" GridPane.rowIndex="4"
+                id="number"/>
+        <Button text="2" onAction="#two_button_click"
+                GridPane.columnIndex="1" GridPane.rowIndex="4"
+                id="number"/>
+        <Button text="3" onAction="#three_button_click"
+                GridPane.columnIndex="2" GridPane.rowIndex="4"
+                id="number"/>
+        <Button text="+" onAction="#plus_button_click"
+                GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+        <Button text="+/-" onAction="#negate_button_click"
+                GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <Button text="0" onAction="#zero_button_click"
+                GridPane.columnIndex="1" GridPane.rowIndex="5"
+                id="number"/>
+        <Button text="." onAction="#decimal_button_click"
+                GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+        <Button text="=" onAction="#equals_button_click"
+                GridPane.columnIndex="3" GridPane.rowIndex="5"
+                id="equals-press"/>
+    </GridPane>
+</GridPane>

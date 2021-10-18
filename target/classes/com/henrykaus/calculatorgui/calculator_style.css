@@ -1,0 +1,71 @@
+.root
+{
+    -fx-background-color: rgb(35, 35, 35);
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: lighter;
+    -fx-font-size: 14pt;
+    -fx-font-smoothing-type: gray;
+}
+
+.button
+{
+    -fx-max-height: Infinity;
+    -fx-max-width:  Infinity;
+    -fx-background-radius: 0;
+    -fx-background-color: rgb(19, 19, 19);
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: rgb(249, 249, 249);
+}
+
+.button:hover
+{
+    -fx-background-color: rgb(75, 75, 75);
+    -fx-background-insets: 0,1,2;
+}
+
+.label
+{
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: BOLD;
+    -fx-text-fill: rgb(249, 249, 249);
+}
+
+#answer
+{
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: BOLD;
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(175, 175, 175);
+}
+
+#expression_field
+{
+    -fx-font-size: 24pt;
+    -fx-background-insets: 0,1,2;
+    -fx-background-color: rgb(19, 19, 19);
+    -fx-text-fill: rgb(249, 249, 249);
+}
+
+#equals-press
+{
+    -fx-background-color: rgb(50, 68, 82);
+}
+#equals-press:hover
+{
+    -fx-background-color: rgb(68, 106, 134);
+    -fx-background-insets: 0,1,2;
+}
+
+#number
+{
+    -fx-font-weight: BOLDER;
+    -fx-background-color: rgb(6, 6, 6);
+}
+
+#number:hover
+{
+    -fx-background-color: rgb(75, 75, 75);
+    -fx-background-insets: 0,1,2;
+}
