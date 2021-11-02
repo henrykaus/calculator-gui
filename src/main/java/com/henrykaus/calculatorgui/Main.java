@@ -13,13 +13,12 @@ import java.util.Objects;
 // MAIN
 public class Main extends Application
 {
-    // MAINOverride
     public static void main(String[] args)
     {
         launch(args);
     }
 
-    @MAINOverride
+    @Override
     public void start(Stage stage) throws IOException
     {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("calculator-view.fxml"));
