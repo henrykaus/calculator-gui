@@ -27,13 +27,13 @@ public class calculator_controller
 
         if (expression.equals(""))
             expression = null;
-        program_calculator.set_expression(expression);
 
         try {
-            if (program_calculator.is_valid())
-                answer.setText(Double.toString(program_calculator.calculate()));
-            else
-                answer.setText("INVALID");
+            program_calculator.set_expression(expression);
+            answer.setText(Double.toString(program_calculator.calculate()));
+        }
+        catch(IllegalArgumentException exception) {
+            answer.setText("INVALID");
         }
         catch(NullPointerException exception) {
             answer.setText("0");

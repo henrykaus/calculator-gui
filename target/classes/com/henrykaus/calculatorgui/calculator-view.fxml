@@ -12,7 +12,7 @@
 <!-- Entire Calculator -->
 <GridPane vgap="6" xmlns:fx="http://javafx.com/fxml" fx:controller="com.henrykaus.calculatorgui.calculator_controller">
     <padding>
-        <Insets bottom="4.0" left="4.0" right="4.0" top="10.0"/>
+        <Insets bottom="4.0" left="4.0" right="4.0" top="10.0"/>    <!-- Window Borders -->
     </padding>
 
     <!-- Row and Column Settings -->
