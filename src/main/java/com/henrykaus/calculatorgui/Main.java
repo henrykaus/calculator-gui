@@ -25,9 +25,13 @@ public class Main extends Application
         Scene  scene = new Scene(fxmlLoader.load(), 320, 470);
         String css_file = "calculator_style.css";
         try {
+            // Adds css
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(css_file)).toExternalForm());
+            // Starts user on the expression_field
             scene.lookup("#expression_field").requestFocus();
+            // Sets stage params
             stage.setTitle("Calculator");
+            // Adds various calculator icons of various sizes
             stage.getIcons().addAll(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("calculator-icon-256x256.png"))),
                                     new Image(Objects.requireNonNull(Main.class.getResourceAsStream("calculator-icon-128x128.png"))),
                                     new Image(Objects.requireNonNull(Main.class.getResourceAsStream("calculator-icon-64x64.png"))),
@@ -38,6 +42,7 @@ public class Main extends Application
             stage.setScene(scene);
             stage.show();
         }
+        // Reports that the css file is missing
         catch (NullPointerException exception) {
             Alert error_screen = new Alert(Alert.AlertType.ERROR);
             error_screen.setHeaderText("INTERNAL ERROR");

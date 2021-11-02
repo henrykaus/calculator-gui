@@ -2,6 +2,7 @@ package com.henrykaus.calculatorgui;
 
 /**
  * PURPOSE: Houses a symbol and next reference for a linked list of operators of same precedence
+ * HOW TO USE: Next houses an operator of same precedence (ex. + -> -, or * -> /)
  */
 public class operator
 {
