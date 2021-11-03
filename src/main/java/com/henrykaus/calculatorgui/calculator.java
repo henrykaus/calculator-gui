@@ -132,12 +132,12 @@ public class calculator
             boolean curr_char_is_op = is_operator(curr_char);
             boolean prev_char_is_op = is_operator(prev_char);
             // Check various not allowed conditions for operators
-            if (curr_char == '(' && prev_char == ')' ||     // )(5...
-                    curr_char_is_op && prev_char == '(' && curr_char != '(' && curr_char != '-' ||     // (*5...
-                    prev_char_is_op && curr_char == ')' && prev_char != ')'  ||     // 5*)...
+            if (curr_char == '(' && prev_char == ')' ||          // )(5...
+                    curr_char_is_op && prev_char == '(' && curr_char != '(' && curr_char != '-' ||  // (*5...
+                    prev_char_is_op && curr_char == ')' && prev_char != ')'  ||                     // 5*)...
                     prev_char == ')' && curr_char == '.'  ||     // ).5...
                     prev_char == '.' && curr_char == '('  ||     // 5.(...
-                    curr_char_is_op && curr_char != ')' && index == expression.length() - 1 ||   // 8+
+                    curr_char_is_op && curr_char != ')' && index == expression.length() - 1 ||      // 8+
                     curr_char_is_op && prev_char_is_op && (curr_char != '(' && curr_char != ')' && prev_char != ')' && curr_char != '-') || // */
                     curr_char == '(' && is_number(prev_char) ||  // 7(
                     prev_char == ')' && is_number(curr_char)     // )9
@@ -146,16 +146,16 @@ public class calculator
         }
 
         // Check parens (own set of recursion)
-        if (curr_char == '(')                   // Character is opening (
+        if (curr_char == '(')
         {
             // Find closing paren and set current index to closing paren
             index = is_valid(index + 1, true, found_decimal);
             if (index == -1)
                 return -1;
         }
-        else if (curr_char == ')' && searching_for_paren)    // Found matching closing )
-            return index; // Returns back to call above
-        else if (curr_char == ')')                           // Found closing ) w/o opening (
+        else if (curr_char == ')' && searching_for_paren)   // Found matching closing )
+            return index;                                   // Returns back to call above
+        else if (curr_char == ')')                          // Found closing ) w/o opening (
             return -1;
 
         return is_valid(++index, searching_for_paren, found_decimal);
@@ -223,7 +223,7 @@ public class calculator
     private String make_post_fix()
     {
         Stack<Character> operators = new Stack<>();                 // Operators in expression
-        StringBuilder postfix_expression = new StringBuilder(expression.length()*2);     // Postfix form
+        StringBuilder postfix_expression = new StringBuilder(expression.length()*2);    // Postfix form
         char curr_symbol;                                           // Current character
         char prev_symbol = '\0';                                    // Previous character
 
@@ -268,7 +268,7 @@ public class calculator
                 // Common case
                 else
                 {
-                    char top_op     = operators.pop();      // Operator at top of stack
+                    char top_op     = operators.pop();                          // Operator at top of stack
                     int  precedence = compare_precedence(top_op, curr_symbol);  // Precedence of top_op vs curr_symbol
 
                     // If top operator has lower precedence (ex. top:- and curr:*)
@@ -311,9 +311,9 @@ public class calculator
     private double calculate_answer(String postfix_expression)
     {
 
-        Stack<Double> operands       = new Stack<>();       // Operands from expression
+        Stack<Double> operands         = new Stack<>();       // Operands from expression
         StringBuilder curr_full_number = new StringBuilder(); // Current full number
-        int           running_index  = 0;                   // Index in postfix expression
+        int           running_index    = 0;                   // Index in postfix expression
 
         while (running_index < postfix_expression.length())
         {

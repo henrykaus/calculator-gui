@@ -18,15 +18,12 @@ public class calculator_controller
         program_calculator = new calculator();
     }
 
-    /*
+    /**
      * PURPOSE: Perform expression operations on equals click or return press
      */
     @FXML protected void equals_button_click()
     {
         String expression = expression_field.getCharacters().toString();
-
-        if (expression.equals(""))
-            expression = null;
 
         try {
             program_calculator.set_expression(expression);
