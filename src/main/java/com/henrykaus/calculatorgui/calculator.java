@@ -7,6 +7,9 @@ import java.util.Stack;
  * PURPOSE: Calculates an answer to an expression based problem.
  *          Checks for bad input. Only allows characters: (, ), +, -, *, /, ^, and the number keys. Must be in a valid
  *          form, or throws back to user
+ * HOW TO USE: Set an expression using set_expression() [it does error checking and allows space characters], and then
+ *             receive an answer by calling the calculate() method. If set_expression isn't used, the internal expression
+ *             is set to "0" by default and calculate() will return 0.0.
  */
 public class calculator
 {
@@ -233,42 +236,53 @@ public class calculator
             // If a number or decimal, append to postfix expression
             if (is_number(curr_symbol) || curr_symbol == '.')
                 postfix_expression.append(curr_symbol);
+            // Otherwise an operator (unary [-], normal, or parens)
             else
             {
                 // Append variable amount of spaces to separate numbers
                 postfix_expression.append(' ');
+                // If empty stack, push curr op onto stack
                 if (operators.isEmpty() || curr_symbol == '(')
                 {
+                    // If the operator is a NEGATIVE sign (not MINUS), determined by context, add 0 to postfix
                     if (curr_symbol == '-' && (prev_symbol == '\0' || (is_operator(prev_symbol) && prev_symbol != ')')))
                         postfix_expression.append("0 ");
                     operators.push(curr_symbol);
                 }
+                // Append all operators within parens when encountering closing paren
                 else if (curr_symbol == ')')
                 {
                     char top_op;
                     while ((top_op = operators.pop()) != '(')
                         postfix_expression.append(top_op);
                 }
+                // Negative sign determined by context (ex. 9*-6, NOT (...9)-6), add 0 to postfix
                 else if (curr_symbol == '-' && (is_operator(prev_symbol) && prev_symbol != ')'))
                 {
                     postfix_expression.append("0 ");
                     operators.push(curr_symbol);
                 }
+                // Since ^ works right to left (3^3^3 = 3^27, not 27^3) push immediately w/o regard
                 else if (curr_symbol == '^')
                     operators.push(curr_symbol);
-                else // 9*-6
+                // Common case
+                else
                 {
-                    char top_op = operators.pop();
-                    int  precedence = compare_precedence(top_op, curr_symbol);
+                    char top_op     = operators.pop();      // Operator at top of stack
+                    int  precedence = compare_precedence(top_op, curr_symbol);  // Precedence of top_op vs curr_symbol
 
-                    if (precedence > 0)
+                    // If top operator has lower precedence (ex. top:- and curr:*)
+                    if (precedence < 0)
                         operators.push(top_op);
                     else
                     {
                         postfix_expression.append(top_op);
-                        while (!operators.isEmpty() && compare_precedence((top_op = operators.pop()), curr_symbol) >= 0)
+                        // Append operators from stack to postfix while top has less or equal precedence to current operator
+                        while (!operators.isEmpty() && compare_precedence((top_op = operators.pop()), curr_symbol) <= 0)
                         {
-                            if (top_op == '(') {
+                            // If ( is encountered (meaning ')' wasn't found yet), put back and stop appending
+                            if (top_op == '(')
+                            {
                                 operators.push(top_op);
                                 break;
                             }
@@ -281,6 +295,7 @@ public class calculator
             }
         }
 
+        // Append any leftovers to expression
         while (!operators.isEmpty())
             postfix_expression.append(operators.pop());
 
@@ -304,12 +319,15 @@ public class calculator
         {
             // Skip initial whitespace
             for (; running_index < postfix_expression.length() && postfix_expression.charAt(running_index) == ' '; ++running_index);
-            if (running_index == postfix_expression.length()) break;
+            if (running_index == postfix_expression.length())
+                break;
 
             // Grab full double and push on operands stack
-            if (postfix_expression.charAt(running_index) == '.' || is_number(postfix_expression.charAt(running_index))) {
+            if (postfix_expression.charAt(running_index) == '.' || is_number(postfix_expression.charAt(running_index)))
+            {
                 // Get first full number
-                for (; running_index < postfix_expression.length(); ++running_index) {
+                for (; running_index < postfix_expression.length(); ++running_index)
+                {
                     if (postfix_expression.charAt(running_index) == ' ' || is_operator(postfix_expression.charAt(running_index)))
                         break;
                     else
@@ -371,20 +389,20 @@ public class calculator
 
         // Assign operators in array of LL according to order of operations (^,*,/,+,-,(,))
         operators    = new operator[4];
-        operators[0] = new operator('^');
-        operators[1] = new operator('*');
-        operators[1].set_next(new operator('/'));
-        operators[2] = new operator('+');
-        operators[2].set_next(new operator('-'));
-        operators[3] = new operator('(');
-        operators[3].set_next(new operator(')'));
+        operators[0] = new operator('(');
+        operators[0].set_next(new operator(')'));
+        operators[1] = new operator('+');
+        operators[1].set_next(new operator('-'));
+        operators[2] = new operator('*');
+        operators[2].set_next(new operator('/'));
+        operators[3] = new operator('^');
     }
 
     /**
      * PURPOSE: Compares precedence of two operators passed in
      * @param left is operator 1
      * @param right is operator 2
-     * @return 0< if left is greater, <0 if right is greater, 0 if same
+     * @return 0< if left has greater, <0 if right has greater, 0 if same
      */
     private int compare_precedence(char left, char right)
     {
@@ -397,7 +415,7 @@ public class calculator
     /**
      * PURPOSE: Finds rank of a given operator according to order of operations
      * @param to_find is operator to find rank of
-     * @return returns index in array ( 0=^ | 1=*,/ | 2=*,/ | 3=(,) )
+     * @return returns index in array ( 0=(,) | 1=+,- | 2=*,/ | 3=^ )
      * @throws IndexOutOfBoundsException if operator doesn't exist
      */
     private int find_rank(char to_find) throws IndexOutOfBoundsException
