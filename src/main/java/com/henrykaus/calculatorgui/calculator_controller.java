@@ -27,7 +27,12 @@ public class calculator_controller
 
         try {
             program_calculator.set_expression(expression);
-            answer.setText(Double.toString(program_calculator.calculate()));
+            double result = program_calculator.calculate();
+            // Displays without decimal point (.0) if an integer
+            if (result % 1 != 0)
+                answer.setText(Double.toString(result));
+            else
+                answer.setText(Integer.toString((int)result));
         }
         catch(IllegalArgumentException exception) {
             answer.setText("INVALID");
@@ -73,12 +78,13 @@ public class calculator_controller
     @FXML protected void negate_button_click()
     {
         String expression_string = expression_field.getCharacters().toString();
-        if (expression_string.equals(""))
-            return;
-        else if (expression_string.length() >= 3 && expression_string.charAt(0) == '-' && expression_string.charAt(1) == '(' && expression_string.charAt(expression_string.length() - 1) == ')')
-            expression_field.setText(expression_string.substring(2, expression_string.length() - 1));
-        else
-            expression_field.setText("-(" + expression_field.getCharacters().toString() + ")");
+        if (!expression_string.equals(""))
+        {
+            if (expression_string.length() >= 3 && expression_string.charAt(0) == '-' && expression_string.charAt(1) == '(' && expression_string.charAt(expression_string.length() - 1) == ')')
+                expression_field.setText(expression_string.substring(2, expression_string.length() - 1));
+            else
+                expression_field.setText("-(" + expression_field.getCharacters().toString() + ")");
+        }
     }
 
     /**

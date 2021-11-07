@@ -8,7 +8,7 @@ import java.util.Stack;
  *          Checks for bad input. Only allows characters: (, ), +, -, *, /, ^, and the number keys. Must be in a valid
  *          form, or throws back to user
  * HOW TO USE: Set an expression using set_expression() [it does error checking and allows space characters], and then
- *             receive an answer by calling the calculate() method. If set_expression isn't used, the internal expression
+ *             receive an answer by calling calculate() method. If set_expression isn't used, the internal expression
  *             is set to "0" by default and calculate() will return 0.0.
  */
 public class calculator
@@ -154,7 +154,7 @@ public class calculator
                 return -1;
         }
         else if (curr_char == ')' && searching_for_paren)   // Found matching closing )
-            return index;                                   // Returns back to call above
+            return index;                                   // Return back to call above
         else if (curr_char == ')')                          // Found closing ) w/o opening (
             return -1;
 
@@ -380,7 +380,7 @@ public class calculator
     }
 
     /**
-     * PURPOSE: initialize data fields of calculator and put operators in PEMDAS order
+     * PURPOSE: initialize data fields of calculator and put operators in order of operations
      */
     private void init()
     {
