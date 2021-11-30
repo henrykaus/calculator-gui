@@ -29,7 +29,8 @@ public class calculator_controller
             program_calculator.set_expression(expression);
             double result = program_calculator.calculate();
             // Displays without decimal point (.0) if an integer
-            if (result % 1 != 0)
+
+            if (result != Math.round(result))
                 answer.setText(Double.toString(result));
             else
                 answer.setText(Integer.toString((int)result));
