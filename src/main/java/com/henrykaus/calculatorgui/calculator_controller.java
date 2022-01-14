@@ -30,10 +30,10 @@ public class calculator_controller
             double result = program_calculator.calculate();
 
             // Displays without decimal point (.0) if an integer
-            if (result != Math.round(result) || result > Integer.MAX_VALUE)
+            if (result != Math.round(result) || result > calculator.MAX_SAFE_INTEGER)
                 answer.setText(Double.toString(result));
             else
-                answer.setText(Integer.toString((int)result));
+                answer.setText(Long.toString((long)result));
         }
         catch(IllegalArgumentException exception) {
             answer.setText("INVALID");

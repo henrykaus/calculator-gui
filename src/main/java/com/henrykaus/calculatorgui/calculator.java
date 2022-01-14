@@ -16,6 +16,7 @@ public class calculator
     private        String     expression;   // Current expression the calculator is working on
     static private operator[] operators;    // Allowed operators ((,),+,-,*,/,^)
     static private char[]     numbers;      // Allowed numbers (0,1,2,3,4,5,6,7,8,9)
+    static         long       MAX_SAFE_INTEGER = 9007199254740991L; // Max integer stored by a double
 
     // Default constructor
     public calculator()
