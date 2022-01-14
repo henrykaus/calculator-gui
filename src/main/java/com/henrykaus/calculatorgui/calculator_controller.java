@@ -30,7 +30,7 @@ public class calculator_controller
             double result = program_calculator.calculate();
 
             // Displays without decimal point (.0) if an integer
-            if (result != Math.round(result))
+            if (result != Math.round(result) || result > Integer.MAX_VALUE)
                 answer.setText(Double.toString(result));
             else
                 answer.setText(Integer.toString((int)result));
