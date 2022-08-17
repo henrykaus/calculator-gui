@@ -1,5 +1,5 @@
 # CalculatorGUI
-An expression-based calculator
+An expression-based calculator.
 
 This program was specifically compiled and created using IntelliJ Idea with Maven
 to create fat Jars. The source code is included in the "src" directory and could
